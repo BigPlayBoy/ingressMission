@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping 
+			PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tjnu.test">
+	<!-- Person表 -->
+	<class name="Person" table="person">
+		<!-- person 表保存公共属性 -->
+		<id name="id">
+			<!-- 父类的主键生成策略为‘分配’ -->
+			<generator class="increment"/>
+		</id>
+		<property  name="name" type="string"/>
+		<property  name="sex" type="string"/>
+		<property  name="age" type="java.lang.Integer"/>
+
+		<!-- student表 ,name是类名。table是对应的表名-->
+		<joined-subclass name="com.tjnu.test.Students" table="student">
+			<key column="Sid" foreign-key="id"/>  <!-- 指定了子类和父类之间是通过哪个字段来关联的 ，这里的关联是内连接-->
+			<property name="sno" type="string"/> <!-- 子类特征属性 -->
+			<property  name="school" type="string"/>    <!-- 子类特征属性 -->
+		</joined-subclass>
+
+		<!-- worker表 -->
+		<joined-subclass name="Worker" table="worker">
+			<key column="Wid" foreign-key="id"/>
+			<property name="wno" type="string"/>  <!-- 子类特征属性 -->
+			<property name="salary" type="double"/>  <!-- 子类特征属性 -->
+		</joined-subclass>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping 
+			PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tjnu.DataBase">
+	<!-- 题目基本表 -->
+	<class name="Subject" table="subject_tb">
+		<!-- 题目基本表保存公共属性 -->
+		<id name="subjectId">
+			<!-- 父类的主键生成策略为‘自动增长’ -->
+			<generator class="increment"/>
+		</id>
+		<property  name="subjectContent" type="string"/><!--题目内容-->
+		<property  name="subjectChapter" type="java.lang.Integer"/><!--题目所属章节-->
+		<property  name="subjectGrade" type="java.lang.Integer"/><!--题目分值-->
+		<property  name="subjectHard" type="java.lang.Integer"/><!--题目难易程度-->
+		<property  name="subjectImg" type="string"/><!--题目所需图片链接-->
+		<property  name="subjectBeizhu" type="string"/><!--题目解释-->
+		<property  name="subjectType" type="string"/><!--题目类型-->
+
+		<!-- 判断题表 ,name是类名。table是对应的表名-->
+		<joined-subclass name="Jduge" table="jduge_tb">
+			<key column="jdugeId" foreign-key="subjectId"/>  <!-- 指定了子类和父类之间是通过哪个字段来关联的 ，这里的关联是内连接-->
+			<property name="jdugeAnswer" type="string"/> <!-- 子类特征属性 -->
+		</joined-subclass>
+
+		<!-- 选择题表 -->
+		<joined-subclass name="Select" table="select_tb">
+			<key column="selectId"  foreign-key="subjectId"/>
+			<property name="selectA" type="string"/>  <!-- 子类特征属性 -->
+			<property name="selectB" type="string"/>  <!-- 子类特征属性 -->
+			<property name="selectC" type="string"/>  <!-- 子类特征属性 -->
+			<property name="selectD" type="string"/>  <!-- 子类特征属性 -->
+			<property name="selectAnswer" type="string"/>  <!-- 子类特征属性 -->
+		</joined-subclass>
+
+		<!-- 多选题表 -->
+		<joined-subclass name="Selects" table="selects_tb">
+			<key column="selectsId" foreign-key="subjectId"/>
+			<property name="selectsA" type="string"/>  <!-- 子类特征属性 -->
+			<property name="selectsB" type="string"/>  <!-- 子类特征属性 -->
+			<property name="selectsC" type="string"/>  <!-- 子类特征属性 -->
+			<property name="selectsD" type="string"/>  <!-- 子类特征属性 -->
+			<property name="selectsE" type="string"/>  <!-- 子类特征属性 -->
+			<property name="selectsAnswer" type="string"/>  <!-- 子类特征属性 -->
+		</joined-subclass>
+	</class>
+</hibernate-mapping>

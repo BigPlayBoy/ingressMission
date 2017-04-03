@@ -10,6 +10,19 @@
 		<property name="urlName" type="java.lang.String"/><!-- 映射studentName属性 -->
 		<property name="href" type="java.lang.String"/><!-- 映射result属性 -->
         <property name="area" type="java.lang.String"/><!-- 映射result属性 -->
-
+        <joined-subclass name="com.cui.bean.Mission" table="mission">
+            <key column="missionId" foreign-key="urlId"></key>
+            <property name="designer"/>
+            <property name="missionNo"/>
+            <property name="portalNo"/>
+            <property name="position"/>
+            <property name="start"/>
+            <property name="end"/>
+            <property name="missionProperty"/>
+            <property name="requiredTime"/>
+            <property name="suggestedTrans"/>
+            <property name="notice"/>
+            <property name="missionImg"/>
+        </joined-subclass>
     </class>
 </hibernate-mapping>

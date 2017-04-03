@@ -1,7 +1,6 @@
 package com.cui.Utils;
 
 
-
 import java.io.*;
 
 
@@ -12,7 +11,7 @@ import java.io.*;
 public class FileTool {
 //    static Logger logger = LoggerFactory.getLogger("FileTool.class");
 
-     public static String readFile(File file, String code) {
+    public static String readFile(File file, String code) {
         String string = null;
         BufferedReader bufferedReader = null;
         try {
@@ -21,7 +20,7 @@ public class FileTool {
             while ((s = bufferedReader.readLine()) != null) {
                 string += s;
             }
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
 //            logger.error("读取文件失败！文件名：" + file);
         } finally {
@@ -35,7 +34,7 @@ public class FileTool {
         return string;
     }
 
-     static boolean saveFile(String string, File filePath) {
+    public boolean saveFile(String string, File filePath) {
         PrintWriter printWriter = null;
         if (string == null) {
 //            logger.error("待写入信息为空，请确认后再次写入");
@@ -55,10 +54,31 @@ public class FileTool {
 
 
     public static void main(String[] args) {
-        File file = new File("d:/1.html");
+//        File file = new File("d:/1.html");
 //        File file1 = new File("e:/798.html");
-        String result = readFile(file, "utf-8");
-        System.out.println(result);
-//        saveFile("12345", file1);
+//        String result = readFile(file, "utf-8");
+//        System.out.println(result);
+//        FileTool.saveFile("12345", file1);
+        getFileName();
+    }
+
+    public static File[] getFileName() {
+        String path = "d:/coding"; // 路径
+        File f = new File(path);
+        if (!f.exists()) {
+            System.out.println(path + " 不存在");
+            return null;
+        }
+
+        File files[] = f.listFiles();
+//        for (int i = 0; i < files.length; i++) {
+//            File fs = files[i];
+//            if (fs.isDirectory()) {
+//                System.out.println(fs.getName() + " [目录]");
+//            } else {
+//                System.out.println(fs.getName());
+//            }
+//        }
+        return  files;
     }
 }

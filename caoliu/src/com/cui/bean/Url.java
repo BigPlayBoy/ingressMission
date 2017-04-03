@@ -7,7 +7,7 @@ public class Url {
     private int urlId;
     private String urlName;
     private String href;
-private String area;
+    private String area;
 
     @Override
     public String toString() {
